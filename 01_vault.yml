@@ -5,7 +5,7 @@
   vars_files:
     - ~/secret.yml
   vars:
-    ansible_password: "{{ windows_password }}"
+    ansible_password: "{{ Test01234!! }}"
   tasks:
   - name: Install IIS (Web-Server only)
     win_feature:
