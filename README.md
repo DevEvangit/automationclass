@@ -1,72 +1,25 @@
 # Automationclass with Ansible
 
-## Automate Linux, Windows and Cloud
+Class material for Automation class
 
-### Prerequsits
+Part of the GitOps training path
 
-#### Environment
+Site is build with Hugo - static website builder
 
-5 servers - made available in Azure
+## Build website with Hugo
 
-3 - Running Red Hat Enterprise Linux 8
-Accessible with ssh and http/https
+```bash
 
-* ansible - 10.1.0.4
-* server1 - 10.1.0.5
-* server2 - 10.1.0.6
+hugo -D
 
-2 - Running Windows Server 2019 with GUI
-Accessible with winRM and RDP
+```
 
-* server3 - 10.1.0.7
-* server4 - 10.1.0.8
+## Build Docker image
 
-#### Software on your client
+```bash
 
-* VSCode (or other IDE) [Download vscode](https://code.visualstudio.com/download)
-* Git [Download Git](https://git-scm.com/downloads)
-* ssh client
-* RDP client
-* Webbrowser
-* Optional: Powershell Core 7 [Download Powershell Core](https://github.com/PowerShell/PowerShell)
-* Optional: Windows Terminal (Install from Windows Store)
+docker build -t website:latest .
 
-[Prepare Labs](prepare.md)
+docker run -d -p 80:80 website
 
-## Labs
-
-### Lab 1: [Install Ansible](lab01/lab1.md)
-
-Install Ansible and Connect to a Linux and Windows Server
-
-### Lab 2: [Ansible Playbooks](lab02/lab2.md)
-
-Create Ansible Playbooks
-
-### Lab 3: [Ansible Vault](lab03/lab3.md)
-
-Use ansible vault to secure secrets
-
-### Lab 4: [Work with Playbooks](lab04/lab4.md)
-
-Use Variables, prompts, facts and handlers in Playbooks
-
-### Lab 5: [Ansible linting](lab05/lab5.md)
-
-Use linting in ansible
-
-### Lab 6: [Roles](lab06/lab6.md)
-
-Use and create roles with Ansible
-
-### Lab 7: [Ansible Windows](lab07/lab7.md)
-
-Use Ansible to manage Windows Servers
-
-### Lab 8: [Ansible Cloud](lab08/lab8.md)
-
-Use Ansible in the Cloud (Microsoft Azure)
-
-### Lab 9: [Ansible AWX Tower](lab09/lab9.md)
-
-Use AWX/Ansible Tower to create a workflow
+```

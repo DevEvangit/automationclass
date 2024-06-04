@@ -1,0 +1,43 @@
+name: CD-Azure
+on:
+  workflow_dispatch:
+    inputs:
+      cpu:
+        type: choice
+        description: Select number of CPU
+        options:
+          - "1"
+          - "2"
+        default: "1"
+      memory:
+        type: choice
+        description: Select amount of memory
+        options:
+          - "1.5"
+          - "3"
+        default: "1.5"
+      environment:
+        description: 'Environment to run deployment against'
+        type: environment
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+        - name: 'Login via Azure CLI'
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        - name: 'Deploy to Azure Container Instances'
+          uses: 'azure/aci-deploy@v1'
+          with:
+            resource-group: ${{ vars.RESOURCE_GROUP }}
+            dns-name-label: ${{ vars.CONTAINER_NAME }}${{ github.run_number }}
+            image: ${{ vars.CONTAINER_IMAGE }}:latest
+            name: ${{ vars.CONTAINER_NAME }}
+            location: 'north europe'
+            cpu: ${{ github.event.inputs.cpu }}
+            memory: ${{ github.event.inputs.memory }}
